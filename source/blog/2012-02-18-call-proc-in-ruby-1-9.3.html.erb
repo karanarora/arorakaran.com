@@ -1,0 +1,18 @@
+---
+title: Proc call in ruby1.9.3
+date: 18/02/2012
+tags: Proc In Ruby,Ruby
+---
+
+<pre class="brush:ruby">
+my_proc = Proc.new do|name|
+  "this is #{name}"
+end
+#you can call this proc by 4 ways
+
+my_proc.call('rays')
+my_proc.('rashmi')
+my_proc("rita")
+my_proc === "richa"
+
+</pre>

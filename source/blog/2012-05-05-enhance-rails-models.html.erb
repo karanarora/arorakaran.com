@@ -3,63 +3,58 @@ title: Enhance Rails Models
 date: 05/05/2012
 tags: activerecord,association,polymorphic 
 ---
-Models play a important part in our Rails App.
+Models play a important part in our Rails App.Here i am just reminding you some basic points to refactor a model.
 
-Here i am just reminding you some basic points to refactor a model
+<div>
+  <strong>1. Follow law of Demeter(In rails it means use only one dot)</strong>
 
-<strong>1. Follow law of Demeter(In rails it means use only one dot)</strong>
+  <pre class="brush:ruby">
+  class Author  < ActiveRecord::Base
+   has_many :books
+   has_one  :address
+  end
 
-<pre class="brush:ruby">
-<code class='ruby'>
-class Author  < ActiveRecord::Base
- has_many :books
- has_one  :address
-end
+  class Book < ActiveRecord::Base
+   belongs_to :author
+  end
 
-class Book < ActiveRecord::Base
- belongs_to :author
-end
+  class Address < ActiveRecord::Base
+    belongs_to :author
+  end
+  </pre>
+  so if in a view we have something like
+  <pre class="brush:ruby">
+  </pre>
+  Here we are calling an object's related object using a third(book -> customer -> address)
 
-class Address < ActiveRecord::Base
-  belongs_to :author
-end
-</code>
-</pre>
-so if in a view we have something like
-<pre class="brush:ruby">
-<code class='ruby'>
-
-</code>
-</pre>
-Here we are calling an object's related object using a third(book -> customer -> address)
-
-Luckily in Rails we have Delegate that can escape us from this situation
+  Luckily in Rails we have Delegate that can escape us from this situation
 
 
-<pre class="brush:ruby">
-<code>
-class Author  < ActiveRecord::Base
- has_many :books
- has_one  :address
-end
+  <pre class="brush:ruby">
+  class Author  < ActiveRecord::Base
+   has_many :books
+   has_one  :address
+  end
 
-class Book < ActiveRecord::Base
- belongs_to :author'
- delegate :name,
-             :street,
-             :city,
-             :state,
-             :to => :author, :prefix => true, :allow_nil => true
+  class Book < ActiveRecord::Base
+   belongs_to :author'
+   delegate :name,
+               :street,
+               :city,
+               :state,
+               :to => :author, :prefix => true, :allow_nil => true
 
-end
+  end
 
-class Address < ActiveRecord::Base
-	belongs_to :author
-	delegate :street,:city,:state, :to => :address ,:allow_nil => true
-end
+  class Address < ActiveRecord::Base
+  	belongs_to :author
+  	delegate :street,:city,:state, :to => :address ,:allow_nil => true
+  end
 
-</pre>
-Now we have just only dot.Here :allow_nil option prevents the error call method on nil object
+  </pre>
+  Now we have just only dot.Here :allow_nil option prevents the error call method on nil object
+
+</div>
 
 <strong>2. Use callback and validation.instead of writing large code in your method</strong>
 

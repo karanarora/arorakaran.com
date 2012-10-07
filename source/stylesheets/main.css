@@ -8,7 +8,7 @@ body {
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container{
-  width: 1170px;
+  width: 1230px;
 }
 
 .container {
@@ -103,10 +103,14 @@ text-decoration: none;
     overflow: hidden;
 }
 
-.content{width:830px; float:left;}
-.right_side{width :275px; float:left; margin-left:25px;}
+/*.content{width:830px; float:left;}*/
+
+.right_side{width :300px; float:left; margin-left:50px;}
+
 .right_side img{
 	width:150px;
 }
+
+#main{width: 840px; float: left ;}
 
 
