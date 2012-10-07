@@ -1,0 +1,26 @@
+<%= partial "banner" %>
+<div id="main" role="main" class="container">
+  <div class="row">
+    <div class="span9">
+      <div id="main" role="main">
+        <div class="entry">
+          <h1 class="color-orange">Articles tagged '<%= @tag %>'</h1>
+
+          <% if @articles %>
+            <% @articles[0...12].each do |article| %>
+              <li><a href="<%= article.url %>"><%= article.title %></a>
+                <time><%= article.date.strftime('%b %e') %></time>
+              </li>
+            <% end %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+    <%= partial "sidebar" %>
+  </div>
+</div>
+<%= partial "footer" %>
+
+
+

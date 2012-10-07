@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<%= partial "head" %>
+<body>
+<div class='container'>
+  <%= partial "banner" %>
+  <div class ='main_box'>
+    <div class='content'>
+      <div id="main" role="main">
+        <%= yield%>
+      </div>
+    </div>
+    <%= partial 'sidebar'%>
+  </div>
+
+</div>
+</body>
+</html>

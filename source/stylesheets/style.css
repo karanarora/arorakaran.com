@@ -1,0 +1,49 @@
+.hero-unit{background: #FFF;padding: 0}
+.page-header{clear: both; }
+.carousel-inner img{height: 300px; width: 100%}
+#printBtn,#downBtn{width: 100%;margin: 10px 0 0 0 }
+footer{text-align: center}
+.twitter{background-image: url(/images/twitter.png);background-position: 0px 0px;}
+.github{background-image: url(/images/github.png);background-position: 0px 0px;}
+.blog-link{margin: 10px 0 0;width: 100%;}
+.blog-link-img{background-image: url(/images/wordpress.png);background-position: 0px 0px;}
+
+.banner {
+  padding: 10px 0px 8px 0px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #EEE;
+}
+
+.banner a:hover {
+  text-decoration: none !important;
+}
+
+.summary {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.summary p{
+  font-size: 0.9em;
+}
+
+.post {
+  text-align: justify;
+}
+
+.post p{
+  font-size: 1.1em;
+  padding: 5px;
+}
+
+.color-orange {
+  color: #393 !important;
+}
+
+a {
+  color: #800 !important;
+}
+.date{
+	font-size: 14px;
+	margin-top: -20px;
+}
