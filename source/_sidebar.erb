@@ -1,8 +1,22 @@
-<div class='right_side'>
+<div class='right_side' xmlns="http://www.w3.org/1999/html">
 	<h2>
-		<img src="images/me.jpeg">
+		<a href="/about"><img src="images/me.jpeg">
+          <div style="font-size: 14px;">About</div>
+        </a>
 	</h2>
 	<hr>
-	<h2>Github</h2>
-	<h2>Twitter</h2>
+	<p>
+      <a href="https://github.com/rashmi14yadav"><img src="images/github-icon.png" class='github'></a>
+      <a href="http://twitter.com/raysrashmi"><img src="images/twitter.png" class='github'></a>
+    </p>
+    <hr>
+
+  <h2>Articles</h2>
+    <ol class='font14'>
+      <% blog.articles.each do |article| %>
+        <li><a href="<%= article.url %>"><%= article.title %></a> <span><%= article.date.strftime('%b %e %Y') %></span></li>
+      <% end %>
+    </ol>
+    <hr>
+  <a href="http://coderwall.com/rashmi14yadav"><img alt="Endorse rashmi14yadav on Coderwall" src="http://api.coderwall.com/rashmi14yadav/endorsecount.png" /></a>
 </div>

@@ -113,4 +113,9 @@ text-decoration: none;
 
 #main{width: 840px; float: left ;}
 
+.github{
+    width: 40px !important;
+}
+.font14{font-size: 14px !important;}
+
 

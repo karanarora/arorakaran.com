@@ -3,8 +3,8 @@
 .carousel-inner img{height: 300px; width: 100%}
 #printBtn,#downBtn{width: 100%;margin: 10px 0 0 0 }
 footer{text-align: center}
-.twitter{background-image: url(/images/twitter.png);background-position: 0px 0px;}
-.github{background-image: url(/images/github.png);background-position: 0px 0px;}
+/*.twitter{background-image: url(/images/twitter.png);background-position: 0px 0px;}*/
+/*.github{background-image: url(/images/github.png);background-position: 0px 0px;}*/
 .blog-link{margin: 10px 0 0;width: 100%;}
 .blog-link-img{background-image: url(/images/wordpress.png);background-position: 0px 0px;}
 
