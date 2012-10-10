@@ -18,5 +18,11 @@
       <% end %>
     </ol>
     <hr>
+  <h2>Tags</h2>
+    <ol>
+      <% blog.tags.each do |tag, articles| %>
+        <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
+      <% end %>
+    </ol>
   <a href="http://coderwall.com/rashmi14yadav"><img alt="Endorse rashmi14yadav on Coderwall" src="http://api.coderwall.com/rashmi14yadav/endorsecount.png" /></a>
 </div>
