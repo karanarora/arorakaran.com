@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rashmi Yadav</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+  <link href="/stylesheets/bootstrap.css?1349946655" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/bootstrap-responsive.css?1349946655" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/style.css?1349946655" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/main.css?1349946655" media="screen" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/bootstrap.js?1349946655" type="text/javascript"></script>
+</head><body>
+<div class="container">
+  <div id='header' class="row">
+  <h1>Rashmi Yadav</h1>
+</div>
+  <div class="main_box">
+    <div class="content">
+      <div id="main" role="main">
+        <article>
+          <h2 style="padding-bottom: 10px;">
+            <span class="color-orange">Asset Pipeline with Rails 3.1</span>
+            <span>Nov 29 2011</span>
+            <!--<span><a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fraysrashmi.com%2F&amp;source=tweetbutton&amp;text=Polymorphic%20Association%20with%20has_many%20%3Athrough&amp;url=http%3A%2F%2Fraysrashmi.com%2F2012%2F06%2Fpolymorphic-association-has_many-through%2F&amp;via=raysrashmi" class="btn" id="b" target="_blank"><i></i><span class="label" id="l">Tweet</span></a></span>-->
+          </h2>
+          <div class="post">
+            <p>
+This is the new very interesting and useful  feature in Rails 3.1.
+</p><strong>Asset Pipeline</strong><ul>
+    <li>The asset pipeline provides a framework to concatenate and minify or compress JavaScript and CSS assets.</li>
+    <li>It allows you to write these assets in other languages like CoffeeScript, Sass and ERB</li>
+    <li>Asset pipeline helpful in production environment cause it will reduce the number of request which browser make.</li>
+</ul><p>Prior to Rails 3.1 these features were added through third-party Ruby libraries such as Jammit and Sprockets. Rails 3.1 is integrated with Sprockets through Action Pack which depends on the sprockets gem, by default.</p><strong>Asset Organization</strong><div>Prior to Rails 3.1 -:</div><ul>
+	<li>Currently we have all assets in one directory public.we are putting all javascripts either it is third party javascirpt or your own javascript.Its not good way to treat them because like in rails we have a very good organization to put our code file.</li>
+	<li>Its not not easy to update our javascirpt code(like if we are using third party code)</li>
+</ul>
+<p>In Rails 3.1-:</p>
+
+<p>There are three directories <ul>
+	<li><strong>app/assets-:</strong> it holds the code write for specific appication</li>
+	<li><strong>lib/assets -:</strong> it holds the generic code we write for our application(for example if we extending any jQuery function)</li>
+	<li><strong>vendor/assets -:</strong> it holds the third party code(like we are using any jQuery plugin)</li>
+</ul> <p>so if you want to access application.css in app/assets/stylesheets.you can just access the url localhost:3000/assets/application.css</p> <p>
+you can add additional path to the pipeline in config/application.rb. For example:
+<pre class='brush:ruby'>config.assets.paths &lt;&lt; Rails.root.join("app", "assets", "flash")</pre>
+</p> <strong>Manifest files and Directives</strong> <ul>
+	<li>Manifest files used by Sprockets(a gem support Asset pipe line its is added in rails 3.1 app by default),in these files contains instruction that tell Sprockets which files are required to build a single CSS or Javascript file,these instructions are called Directives</li>
+	<li>In Rails 3.1 Default Directives are application.js in app/assets./javascripts directory and application.css in app/assets/stylesheets</li>
+</ul> <strong>Assets In Development </strong> <p>
+In Development environment all assets are served as individual files
+For Example in app/assets/javascripts/application.js
+</p></p>
+
+<pre><code>//= require core
+//= require blogs&lt;/blockquote&gt;</code></pre>
+
+<p>after converting in HTML it will look like</p>
+
+<pre><code>&lt;script src=&quot;/assets/core.js?body=1&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/assets/blogs.js?body=1&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
+<p>If turn off debugging by setting config.assets.debug = false in config/environments/development.rb
+above file will generate</p>
+<pre><code>&lt;script src=&quot;/assets/application.js?body=1&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
+<strong>In Production</strong><p>
+Rails server complied assets using <strong>Fingerprinting Scheme</strong>
+</p><p>
+<strong>In Fingerprinting</strong> scheme a hash of  content is attached to the end of file to uniquely identified the file
+blogs-908e25f4bf641868d8683022a5b62f54.css
+</p><p>
+Prior rails 3.1 a time stamp query string is attached to file name
+<span>stylesheets/blogs.css?1409495796</span>
+</p><p>For example -:</p>
+<pre><code>&lt;%= javascript_include_tag :application%&gt;
+&lt;%= stylesheet_link_tag &quot;application&quot; %&gt;</code></pre>
+
+<p>It will compile in to</p>
+
+<pre><code>&lt;script src=&quot;/assets/application-908e25f4bf641868d8683022a5b62f54.js&quot; type =&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;link href=&quot;/assets/application-4dd5b109ee3439da54f5bdfd78a80473.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</code></pre>
+<p>
+The fingerprinting behavior is controlled by the setting of <b>config.assets.digest</b> setting in Rails (which is <b>true</b> for production, <b>false</b> for everything else)
+</p><strong>Useful Links -:</strong><ul>
+<li>
+  <a href='http://railscasts.com/episodes/279-understanding-the-asset-pipeline' target='_blank'>http://railscasts.com/episodes/279-understanding-the-asset-pipeline</a>
+</li>
+<li><a href='http://guides.rubyonrails.org/asset_pipeline.html' target='_blank'>http://guides.rubyonrails.org/asset_pipeline.html</a></li>
+</ul>
+          </div>
+          <hr/>
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              $(function(){
+                  hljs.initHighlightingOnLoad();
+                  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                  var disqus_shortname = 'rays'; // required: replace example with your forum shortname
+
+                  /* * * DON'T EDIT BELOW THIS LINE * * */
+                  (function() {
+                      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+              });
+          </script>
+          <noscript>
+            Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          </noscript>
+          <a href="http://disqus.com" class="dsq-brlink">
+            blog comments powered by <span class="logo-disqus">Disqus</span>
+          </a>
+        </article>
+      </div>
+    </div>
+    <div class='right_side' xmlns="http://www.w3.org/1999/html">
+	<h2>
+		<a href="/about"><img src="/images/me.jpeg">
+          <div style="font-size: 14px;">About</div>
+        </a>
+	</h2>
+	<hr>
+	<p>
+      <a href="https://github.com/rashmi14yadav"><img src="/images/github-icon.png" class='github'></a>
+      <a href="http://twitter.com/raysrashmi"><img src="/images/twitter.png" class='github'></a>
+    </p>
+    <hr>
+
+  <h2>Articles</h2>
+    <ol class='font14'>
+      
+        <li><a href="/2012/06/07/polymorphic-association-has_many-through.html">Polymorphic Association with has_many :through</a> <span>Jun  7 2012</span></li>
+      
+        <li><a href="/2012/05/05/enhance-rails-models.html">Enhance Rails Models</a> <span>May  5 2012</span></li>
+      
+        <li><a href="/2012/05/03/background-processing-using-rails-runner.html">Background Processing Using Rails Runner</a> <span>May  3 2012</span></li>
+      
+        <li><a href="/2012/05/01/rails-3-responders.html">Rails 3 Responders</a> <span>May  1 2012</span></li>
+      
+        <li><a href="/2012/04/22/oauth-omniauth-github.html">OAuth with OmniAuth and Github</a> <span>Apr 22 2012</span></li>
+      
+        <li><a href="/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby.html">Basic Difference between Proc and Lambda in Ruby</a> <span>Feb 19 2012</span></li>
+      
+        <li><a href="/2012/02/18/call-proc-in-ruby-1-9.3.html">Proc call in ruby1.9.3</a> <span>Feb 18 2012</span></li>
+      
+        <li><a href="/2011/11/29/asset-pipeline.html">Asset Pipeline with Rails 3.1</a> <span>Nov 29 2011</span></li>
+      
+        <li><a href="/2011/05/15/jquery-datetime-picker.html">jQuery Date/Time picker</a> <span>May 15 2011</span></li>
+      
+        <li><a href="/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets.html">Twitter Client script to retrieves all the unique http links in the last recent tweets</a> <span>Dec 31 2010</span></li>
+      
+        <li><a href="/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails.html">Include Class Method and Validation  Using Module in RubyOnRails</a> <span>Dec 21 2010</span></li>
+      
+        <li><a href="/2010/12/04/routes-in-rails3.html">Routes in Rails3</a> <span>Dec  4 2010</span></li>
+      
+        <li><a href="/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model.html">ActiveModel in Rails3</a> <span>Nov 24 2010</span></li>
+      
+        <li><a href="/2010/08/02/extended-version-of-active-merchant-plugin.html">Extended Version of Active Merchant Plugin</a> <span>Aug  2 2010</span></li>
+      
+    </ol>
+    <hr>
+  <h2>Tags</h2>
+    <ol>
+      
+        <li><a href="tags/activemerchant.html">ActiveMerchant (1)</a></li>
+      
+        <li><a href="tags/paymentgatewayplugin.html">PaymentGatewayPlugin (1)</a></li>
+      
+        <li><a href="tags/activemodel.html">ActiveModel (1)</a></li>
+      
+        <li><a href="tags/rails.html">Rails (3)</a></li>
+      
+        <li><a href="tags/routes-in-rails3.html">Routes in Rails3 (1)</a></li>
+      
+        <li><a href="tags/routes.html">Routes (1)</a></li>
+      
+        <li><a href="tags/modules.html">Modules (1)</a></li>
+      
+        <li><a href="tags/twitter.html">Twitter (1)</a></li>
+      
+        <li><a href="tags/client-script.html">Client Script (1)</a></li>
+      
+        <li><a href="tags/date-time-picker.html">date/time picker (1)</a></li>
+      
+        <li><a href="tags/jquery.html">jQuery (1)</a></li>
+      
+        <li><a href="tags/asset-pipeline.html">Asset Pipeline (1)</a></li>
+      
+        <li><a href="tags/rails3.html">Rails3 (2)</a></li>
+      
+        <li><a href="tags/proc-in-ruby.html">Proc In Ruby (1)</a></li>
+      
+        <li><a href="tags/ruby.html">Ruby (3)</a></li>
+      
+        <li><a href="tags/proc.html">Proc (1)</a></li>
+      
+        <li><a href="tags/lambda.html">Lambda (1)</a></li>
+      
+        <li><a href="tags/github.html">Github (1)</a></li>
+      
+        <li><a href="tags/oauth.html">OAuth (1)</a></li>
+      
+        <li><a href="tags/omniauth.html">OmniAuth (1)</a></li>
+      
+        <li><a href="tags/railsresponders.html">RailsResponders (1)</a></li>
+      
+        <li><a href="tags/railsrunner.html">RailsRunner (1)</a></li>
+      
+        <li><a href="tags/backgroundtask.html">Backgroundtask (1)</a></li>
+      
+        <li><a href="tags/rubyonrails.html">RubyOnRails (1)</a></li>
+      
+        <li><a href="tags/activerecord.html">activerecord (2)</a></li>
+      
+        <li><a href="tags/association.html">association (2)</a></li>
+      
+        <li><a href="tags/polymorphic.html">polymorphic (2)</a></li>
+      
+    </ol>
+  <a href="http://coderwall.com/rashmi14yadav"><img alt="Endorse rashmi14yadav on Coderwall" src="http://api.coderwall.com/rashmi14yadav/endorsecount.png" /></a>
+</div>
+
+  </div>
+</div>
+</body>
+</html>
